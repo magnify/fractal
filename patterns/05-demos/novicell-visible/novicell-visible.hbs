@@ -1,0 +1,25 @@
+<h1>novicell.visible.js</h1>
+<p>This is a demo page for testing the script.</p>
+
+<div style="position: fixed;">
+  <button id="js-visible-trigger">Run script</button>
+  <p>Result: <span id="js-visible-result"></span></p>
+</div>
+
+<div id="js-outside-viewport" style="position: relative; bottom: -1000em;">Am I visible?</div>
+
+<script src="//raw.githubusercontent.com/Novicell/novicell-visible/master/js/novicell.visible.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Do not use this, only for example purposes!
+    var trigger = document.querySelector('#js-visible-trigger');
+
+    trigger.addEventListener('click', function(event){
+      event.preventDefault();
+
+      var elementId = '#js-outside-viewport';
+
+      document.querySelector('#js-visible-result').innerHTML = novicell.visible.isVisible(elementId);
+    });
+  });
+</script>

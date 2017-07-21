@@ -155,22 +155,31 @@
         
         <pre><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>novicell.visible.js<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is a demo page for testing the script.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Inspect "Am I visible?" and move it outside the viewport (e.g. with bottom: -1000em) to test the script.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-trigger-inside"</span>&gt;</span>Move element inside viewport<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-trigger-outside"</span>&gt;</span>Move element outside viewport<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-trigger"</span>&gt;</span>Run script<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Result: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-result"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-outside-viewport"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"position: relative; bottom: -5em;"</span>&gt;</span>Am I visible?<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-element"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"position: relative;"</span>&gt;</span>Am I visible?<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"//rawgit.com/Novicell/novicell-visible/master/js/novicell.visible.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
     <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"DOMContentLoaded"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-comment">// Do not use this, only for example purposes!</span>
-        <span class="hljs-keyword">var</span> trigger = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-trigger'</span>);
-        trigger.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">var</span> element = <span class="hljs-string">'#js-visible-element'</span>;
+        <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-trigger-inside'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
             event.preventDefault();
-            <span class="hljs-keyword">var</span> elementId = <span class="hljs-string">'#js-outside-viewport'</span>;
-            <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-result'</span>).innerHTML = novicell.visible.isVisible(elementId);
+            <span class="hljs-built_in">document</span>.querySelector(element).style.bottom = <span class="hljs-string">"-5em"</span>;
+        });
+        <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-trigger-outside'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+            event.preventDefault();
+            <span class="hljs-built_in">document</span>.querySelector(element).style.bottom = <span class="hljs-string">"-2000em"</span>;
+        });
+        <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-trigger'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+            event.preventDefault();
+            <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-result'</span>).innerHTML = novicell.visible.isVisible(element);
         });
     });
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></pre>
@@ -183,25 +192,38 @@
     <code class="Code Code--lang-handlebars">
         <pre><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>novicell.visible.js<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is a demo page for testing the script.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Inspect "Am I visible?" and move it outside the viewport (e.g. with bottom: -1000em) to test the script.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-trigger-inside"</span>&gt;</span>Move element inside viewport<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-trigger-outside"</span>&gt;</span>Move element outside viewport<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-trigger"</span>&gt;</span>Run script<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Result: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-result"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-outside-viewport"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"position: relative; bottom: -5em;"</span>&gt;</span>Am I visible?<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-visible-element"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"position: relative;"</span>&gt;</span>Am I visible?<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"//rawgit.com/Novicell/novicell-visible/master/js/novicell.visible.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
   <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"DOMContentLoaded"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-comment">// Do not use this, only for example purposes!</span>
-    <span class="hljs-keyword">var</span> trigger = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-trigger'</span>);
 
-    trigger.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>{
+    <span class="hljs-keyword">var</span> element = <span class="hljs-string">'#js-visible-element'</span>;
+
+    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-trigger-inside'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>{
       event.preventDefault();
 
-      <span class="hljs-keyword">var</span> elementId = <span class="hljs-string">'#js-outside-viewport'</span>;
+      <span class="hljs-built_in">document</span>.querySelector(element).style.bottom = <span class="hljs-string">"-5em"</span>;
+    });
 
-      <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-result'</span>).innerHTML = novicell.visible.isVisible(elementId);
+    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-trigger-outside'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>{
+      event.preventDefault();
+
+      <span class="hljs-built_in">document</span>.querySelector(element).style.bottom = <span class="hljs-string">"-2000em"</span>;
+    });
+
+    <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-trigger'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>{
+      event.preventDefault();
+
+      <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#js-visible-result'</span>).innerHTML = novicell.visible.isVisible(element);
     });
   });
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></pre>

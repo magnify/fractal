@@ -2,25 +2,38 @@
 
 <h1>novicell.visible.js</h1>
 <p>This is a demo page for testing the script.</p>
-<p>Inspect "Am I visible?" and move it outside the viewport (e.g. with bottom: -1000em) to test the script.</p>
 
+<button id="js-visible-trigger-inside">Move element inside viewport</button>
+<button id="js-visible-trigger-outside">Move element outside viewport</button>
 <button id="js-visible-trigger">Run script</button>
+
 <p>Result: <span id="js-visible-result"></span></p>
 
-<div id="js-outside-viewport" style="position: relative; bottom: -5em;">Am I visible?</div>
+<div id="js-visible-element" style="position: relative;">Am I visible?</div>
 
 <script src="//rawgit.com/Novicell/novicell-visible/master/js/novicell.visible.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Do not use this, only for example purposes!
-    var trigger = document.querySelector('#js-visible-trigger');
 
-    trigger.addEventListener('click', function(event){
+    var element = '#js-visible-element';
+
+    document.querySelector('#js-visible-trigger-inside').addEventListener('click', function(event){
       event.preventDefault();
 
-      var elementId = '#js-outside-viewport';
+      document.querySelector(element).style.bottom = "-5em";
+    });
 
-      document.querySelector('#js-visible-result').innerHTML = novicell.visible.isVisible(elementId);
+    document.querySelector('#js-visible-trigger-outside').addEventListener('click', function(event){
+      event.preventDefault();
+
+      document.querySelector(element).style.bottom = "-2000em";
+    });
+
+    document.querySelector('#js-visible-trigger').addEventListener('click', function(event){
+      event.preventDefault();
+
+      document.querySelector('#js-visible-result').innerHTML = novicell.visible.isVisible(element);
     });
   });
 </script>
